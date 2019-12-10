@@ -1,8 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const Index = () => {
+const Product = () => {
+  const { query, asPath } = useRouter();
+
   return (
     <div>
       <Head>
@@ -11,9 +13,10 @@ const Index = () => {
       </Head>
 
       <div>
-        <h1>Demo</h1>
+        <h1>Product {query.id}</h1>
         <ul>
-          <li><Link href='/product?id=abc' as='/abc'><a>Product abc</a></Link></li>
+          <li>query: {JSON.stringify(query)}</li>
+          <li>asPath: {asPath}</li>
         </ul>
       </div>
     </div>
@@ -21,6 +24,6 @@ const Index = () => {
 };
 
 // Opt out of static optimization
-Index.getInitialProps = () => ({});
+Product.getInitialProps = () => ({});
 
-export default Index;
+export default Product;
